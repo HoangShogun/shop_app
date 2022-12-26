@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app/widgets/cart_item.dart' as ci;
 
 import '../providers/cart.dart';
+import '../providers/order.dart';
 
 class CartScreen extends StatelessWidget {
   static final route = '/cart-screen';
@@ -10,6 +11,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
+    final order = Provider.of<Orders>(context);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Cart')),
@@ -33,18 +35,23 @@ class CartScreen extends StatelessWidget {
                   backgroundColor: Colors.purple,
                 ),
                 TextButton(
-                    onPressed: () => print('\$${cart.totalAmount}'),
+                    onPressed: () {
+                      order.addOrder(
+                          cart.items.values.toList(), cart.totalAmount());
+                      cart.clear();
+                    },
                     child: const Text('Order Now'))
               ]),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Expanded(
             child: ListView.builder(
               itemCount: cart.items.length,
               itemBuilder: (context, index) => ci.CartItem(
+                  productId: cart.items.keys.toList()[index],
                   id: cart.items.values.toList()[index].id,
                   amount: cart.items.values.toList()[index].price,
                   title: cart.items.values.toList()[index].title,

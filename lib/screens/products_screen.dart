@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app/providers/cart.dart';
 import 'package:shop_app/screens/cart_screen.dart';
 import 'package:shop_app/widgets/badge.dart';
+import 'package:shop_app/widgets/drawer.dart';
 import '../widgets/product_grid.dart';
 
 enum FilterOption {
@@ -20,17 +21,18 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AppDrawer(),
       appBar: AppBar(
         actions: [
           Consumer<Cart>(
             builder: (_, cartData, child) => Badge(
+              value: cartData.itemCount().toString(),
               child: IconButton(
-                icon: Icon(Icons.shopping_cart),
+                icon: const Icon(Icons.shopping_cart),
                 onPressed: () {
                   Navigator.pushNamed(context, CartScreen.route);
                 },
               ),
-              value: cartData.itemCount().toString(),
             ),
           ),
           PopupMenuButton(

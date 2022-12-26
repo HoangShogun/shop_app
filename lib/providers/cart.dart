@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class CartItem {
   final String id;
@@ -26,12 +27,21 @@ class Cart with ChangeNotifier {
     return _items.length;
   }
 
+  void clear() {
+    _items.clear();
+  }
+
   double totalAmount() {
     double res = 0.0;
     _items.forEach((key, cartItem) {
       res += cartItem.price * cartItem.quantity;
     });
     return (res * 100).roundToDouble() / 100;
+  }
+
+  void removeItem(String productId) {
+    _items.remove(productId);
+    notifyListeners();
   }
 
   void addItem(String productId, double price, String title) {

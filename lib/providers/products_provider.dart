@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/models/product.dart';
+import 'package:shop_app/providers/product.dart';
 
 class ProductsProvider with ChangeNotifier {
+  // ignore: prefer_final_fields
   List<Product> _items = [
     Product(
       id: 'p1',

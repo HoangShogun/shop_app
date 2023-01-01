@@ -8,7 +8,6 @@ import 'package:shop_app/screens/order_screen.dart';
 import 'package:shop_app/screens/product_detail.dart';
 import 'package:shop_app/screens/products_screen.dart';
 import 'package:shop_app/screens/user_product_screen.dart';
-
 import 'providers/cart.dart';
 
 // ignore: prefer_const_constructors
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
           CartScreen.route: (context) => CartScreen(),
           OrderScreen.route: (context) => OrderScreen(),
           UserProductScreen.route: (context) => UserProductScreen(),
-          EditProductScreen.route: (context) => EditProductScreen(),
+          EditProductScreen.route: (context) => const EditProductScreen(),
         },
       ),
     );
